@@ -6,6 +6,9 @@ import { useEffect } from "react"
 import { getDocs } from "firebase/firestore"
 import type { Veiculo } from "../../pages/home/Home"
 import { updateDoc } from "firebase/firestore"
+import { signOut } from "firebase/auth"
+import { auth } from "../../services/firebase"
+import { useNavigate } from "react-router-dom"
 
 function Admin() {
 
@@ -18,6 +21,12 @@ function Admin() {
   const [imagens, setImagens] = useState("")
   const [veiculos, setVeiculos] = useState<Veiculo[]>([])
   const [editandoId, setEditandoId] = useState<string | null>(null)
+  const navigate = useNavigate()
+
+  async function handleLogout() {
+  await signOut(auth)
+  navigate("/login")
+}
 
   async function salvarVeiculo() {
   const imagensArray = imagens.split(",")
@@ -91,7 +100,15 @@ useEffect(() => {
 
 return (
   <div className="p-8 max-w-xl mx-auto">
-    <h1 className="text-2xl font-bold mb-6">Cadastrar Veículo</h1>
+    
+    <div className="flex justify-end items-center p-4 border-b sticky top-0 bg-white z-50">
+      <button className="bg-red-500 w-auto text-white px-2 py-1 rounded-md"
+        onClick={handleLogout}>
+        Sair
+      </button>
+    </div>
+
+    <h1 className="text-2xl font-bold mb-6 mt-3">Cadastrar Veículo</h1>
 
     <div className="flex flex-col gap-3">
       <input
