@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react'
 import { Search } from 'lucide-react'
 import SidebarFiltros from '../../components/sidebarFiltros/SidebarFiltros'
 import { Card, CardHeader, CardTitle, CardDescription } from '../../components/ui/card'
-import banner from '../../assets/banner2!.png'
+import banner from '../../assets/banner2!-recortado.png'
 import { FaWhatsapp, FaDroplet } from 'react-icons/fa6'
 import { FaHeart } from 'react-icons/fa'
 import { CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, Carousel } from '../../components/ui/carousel'
+import { useFavoritos } from '../../context/FavoritosContext'
+import SidebarFavoritos from '../../components/sidebarFavoritos/SidebarFavoritos'
 
 import { db } from '../../services/firebase'
 import { collection, getDocs } from 'firebase/firestore'
@@ -22,6 +24,7 @@ export type Veiculo = {
 }
 
 function Home(){
+  const { toggleFavorito, favoritos } = useFavoritos()
 
   const [veiculos, setVeiculos] = useState<Veiculo[]>([])
   const [busca, setBusca] = useState('')
@@ -66,7 +69,8 @@ const veiculosFiltrados = veiculos.filter((v) => {
 
   return (
     <>
-      <img src={banner} alt="Banner" className="w-full h-100 object-cover" />
+      <SidebarFavoritos veiculos={veiculos} />
+      <img src={banner} alt="Banner" className="w-full h-auto object-cover" />
 
       <div className='flex gap-8  mt-8'>
         <SidebarFiltros
@@ -112,7 +116,6 @@ const veiculosFiltrados = veiculos.filter((v) => {
                 </Carousel>
 
 
-
                 <CardHeader>
                   <CardTitle className="text-lg font-bold">
                     {veiculo.marca} {veiculo.modelo}
@@ -127,7 +130,14 @@ const veiculosFiltrados = veiculos.filter((v) => {
                     </p>
                     <div className="flex justify-between  text-sm mt-2">
                       <span className='flex items-center gap-1'><FaDroplet />{veiculo.combustivel}</span>
-                      <span className='flex items-center gap-3'> <FaHeart size={20}/><FaWhatsapp size={20} className='text-green-500'/></span>
+                      <span className='flex items-center gap-3'> 
+                        <FaHeart 
+                          size={20} 
+                          className={`cursor-pointer transition-colors ${favoritos.includes(veiculo.id) ? 'text-red-600' : 'text-gray-400 hover:text-red-400'}`}
+                          onClick={() => toggleFavorito(veiculo.id)}
+                        /> 
+                        <a href="https://wa.me/11999999999" target="_blank" ><FaWhatsapp size={20} className='text-green-500'/></a>
+                      </span>
                     </div>
                   </CardDescription>
                 </CardHeader>
