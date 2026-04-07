@@ -1,11 +1,22 @@
 import { useState } from "react"
 import "./SidebarFiltros.css"
 
-function SidebarFiltros() {
-  const [marca, setMarca] = useState("")
-  const [preco, setPreco] = useState(50000)
-  const [km, setKm] = useState(20000)
-  const [ano, setAno] = useState(2022)
+type Props = {
+  marca: string
+  setMarca: (value: string) => void
+  preco: number
+  setPreco: (value: number) => void
+  km: number
+  setKm: (value: number) => void
+  ano: number
+  setAno: (value: number) => void
+}
+
+function SidebarFiltros({ marca, setMarca, preco, setPreco, km, setKm, ano, setAno }: Props) {
+  // const [marca, setMarca] = useState("")
+  // const [preco, setPreco] = useState(50000)
+  // const [km, setKm] = useState(20000)
+  // const [ano, setAno] = useState(2022)
 
   return (
     <aside className="w-72 bg-white border-r p-5 sticky top-22 self-start max-h-[calc(100vh-2rem)] overflow-y-auto mt-4">
@@ -20,9 +31,10 @@ function SidebarFiltros() {
           className="w-full border p-2 rounded-md"
         >
           <option value="">Todas</option>
-          <option value="honda">Honda</option>
-          <option value="yamaha">Yamaha</option>
-          <option value="bmw">BMW</option>
+          <option value="Honda">Honda</option>
+          <option value="Yamaha">Yamaha</option>
+          <option value="Bmw">BMW</option>
+          <option value="Kawazaki">Kawazaki</option>
         </select>
       </div>
 
@@ -59,7 +71,7 @@ function SidebarFiltros() {
         <input
           type="range"
           min="2000"
-          max="2025"
+          max="2026"
           step="1"
           value={ano}
           onChange={(e) => setAno(Number(e.target.value))}
@@ -68,9 +80,9 @@ function SidebarFiltros() {
         <p className="text-sm mt-1 color">{ano}</p>
       </div>
 
-      <button className="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition">
+      {/* <button className="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition">
         Aplicar Filtros
-      </button>
+      </button> */}
     </aside>
   );
 }
