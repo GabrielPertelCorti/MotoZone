@@ -7,7 +7,7 @@ import Contato from './pages/contato/Contato'
 import Login from './pages/login/Login'
 import Admin from './pages/admin/Admin'
 import PrivateRoute from './components/privateRoute/PrivateRoute'
-
+import Detalhes from './pages/detalhes/Detalhes'
 
 
 
@@ -30,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/contato",
         element: <Contato />,
+      },
+      {
+        path: "/detalhes/:id",
+        element: <Detalhes />,
       },
     ],
   },

@@ -8,6 +8,7 @@ import { FaHeart } from 'react-icons/fa'
 import { CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, Carousel } from '../../components/ui/carousel'
 import { useFavoritos } from '../../context/FavoritosContext'
 import SidebarFavoritos from '../../components/sidebarFavoritos/SidebarFavoritos'
+import { useNavigate } from 'react-router-dom'
 
 import { db } from '../../services/firebase'
 import { collection, getDocs } from 'firebase/firestore'
@@ -25,6 +26,7 @@ export type Veiculo = {
 
 function Home(){
   const { toggleFavorito, favoritos } = useFavoritos()
+  const navigate = useNavigate()
 
   const [veiculos, setVeiculos] = useState<Veiculo[]>([])
   const [busca, setBusca] = useState('')
@@ -99,11 +101,15 @@ const veiculosFiltrados = veiculos.filter((v) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             {veiculosFiltrados.map((veiculo) => (
-              <Card key={veiculo.id} className='shadow-md hover:shadow-lg transition-shadow border border-gray-100 w-90 h-110'>
+              <Card 
+                key={veiculo.id} 
+                className='shadow-md hover:shadow-lg transition-all border border-gray-100 w-90 h-110 cursor-pointer hover:scale-[1.01]'
+                onClick={() => navigate(`/detalhes/${veiculo.id}`)}
+              >
 
 
                 {/* <img src={veiculo.imagem} alt={veiculo.modelo} className="w-full h-68 object-cover rounded-t-xl" /> */}
-                <Carousel className="relative">
+                <Carousel className="relative" onClick={(e) => e.stopPropagation()}>
                   <CarouselContent>
                     {veiculo.imagens.map((img, i) => (
                       <CarouselItem key={i}>
@@ -134,9 +140,18 @@ const veiculosFiltrados = veiculos.filter((v) => {
                         <FaHeart 
                           size={20} 
                           className={`cursor-pointer transition-colors ${favoritos.includes(veiculo.id) ? 'text-red-600' : 'text-gray-400 hover:text-red-400'}`}
-                          onClick={() => toggleFavorito(veiculo.id)}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            toggleFavorito(veiculo.id)
+                          }}
                         /> 
-                        <a href="https://wa.me/11999999999" target="_blank" ><FaWhatsapp size={20} className='text-green-500'/></a>
+                        <a 
+                          href="https://wa.me/11999999999" 
+                          target="_blank" 
+                          onClick={(e) => e.stopPropagation()} 
+                        >
+                          <FaWhatsapp size={20} className='text-green-500'/>
+                        </a>
                       </span>
                     </div>
                   </CardDescription>
