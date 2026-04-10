@@ -1,6 +1,6 @@
 import Header from '../header/Header'
 import Footer from '../footer/Footer'
-import ScrollToTop from '../scrollTotop/ScrollToTop'
+import ScrollToTop from '../scrollTotop/ScrollToTop.tsx'
 
 
 import { Outlet } from 'react-router-dom'

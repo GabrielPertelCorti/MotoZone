@@ -1,8 +1,8 @@
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
 import { useFavoritos } from "../../context/FavoritosContext";
 
 type Veiculo = {
-  id: number,
+  id: string,
   marca: string,
   modelo: string,
   ano: number,
