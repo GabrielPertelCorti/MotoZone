@@ -1,17 +1,17 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from "react"
 
 type FavoritosContextType = {
-  favoritos: number[]
-  setFavoritos: React.Dispatch<React.SetStateAction<number[]>>
+  favoritos: string[]
+  setFavoritos: React.Dispatch<React.SetStateAction<string[]>>
   isSidebarOpen: boolean
   setIsSidebarOpen: (isOpen: boolean) => void
-  toggleFavorito: (id: number) => void
+  toggleFavorito: (id: string) => void
 }
 
 const FavoritosContext = createContext({} as FavoritosContextType)
 
 export function FavoritosProvider({ children }: { children: ReactNode }) {
-  const [favoritos, setFavoritos] = useState<number[]>(() => {
+  const [favoritos, setFavoritos] = useState<string[]>(() => {
     const saved = localStorage.getItem("@loja-motos:favoritos")
     return saved ? JSON.parse(saved) : []
   })
@@ -22,7 +22,7 @@ export function FavoritosProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("@loja-motos:favoritos", JSON.stringify(favoritos))
   }, [favoritos])
 
-  const toggleFavorito = (id: number) => {
+  const toggleFavorito = (id: string) => {
     setFavoritos((prev) => 
       prev.includes(id) ? prev.filter(favId => favId !== id) : [...prev, id]
     )

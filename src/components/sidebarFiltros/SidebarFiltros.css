@@ -1,0 +1,9 @@
+input[type="range"] {
+  accent-color: #dc2626;
+  cursor: pointer;
+}
+
+.custom-range {
+  accent-color: #dc2626;
+}
+

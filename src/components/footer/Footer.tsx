@@ -1,4 +1,5 @@
 import { FaWhatsapp, FaInstagram, FaFacebook } from "react-icons/fa"
+import { Link } from "react-router-dom"
 
 function Footer() {
   return (
@@ -17,7 +18,7 @@ function Footer() {
             <li className="hover:text-black cursor-pointer">Avaliação</li>
             <li className="hover:text-black cursor-pointer">Financiamento</li>
             <li className="hover:text-black cursor-pointer">Contato</li>
-            <li className="hover:text-black cursor-pointer">Quem somos</li>
+            {/* <li className="hover:text-black cursor-pointer">Quem somos</li> */}
           </ul>
         </div>
 
@@ -34,9 +35,8 @@ function Footer() {
 
       <div className="bg-gray-800 text-white text-sm py-3 px-6 flex flex-col md:flex-row justify-between items-center gap-2">
         <div className="flex items-center gap-4">
-          <span>🔍 Busca</span>
-          <span>📩 Contato</span>
-          <span>📱 (27) 99999-9999</span>
+          <Link to="/contato"><span>📩 Contato</span></Link>
+          <span><a href="https://wa.me/5527996573238" target="_blank">📱 (27) 99999-9999</a></span>
         </div>
 
         <p>

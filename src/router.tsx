@@ -8,8 +8,7 @@ import Login from './pages/login/Login'
 import Admin from './pages/admin/Admin'
 import PrivateRoute from './components/privateRoute/PrivateRoute'
 import Detalhes from './pages/detalhes/Detalhes'
-
-
+import Favoritos from './pages/favoritos/Favoritos'
 
 const router = createBrowserRouter([
   {
@@ -30,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/contato",
         element: <Contato />,
+      },
+      {
+        path: "/favoritos",
+        element: <Favoritos />,
       },
       {
         path: "/detalhes/:id",
