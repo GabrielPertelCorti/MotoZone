@@ -9,6 +9,7 @@ import { updateDoc } from "firebase/firestore"
 import { signOut } from "firebase/auth"
 import { auth } from "../../services/firebase"
 import { useNavigate } from "react-router-dom"
+import { toast } from "sonner"
 
 function Admin() {
 
@@ -42,12 +43,12 @@ function Admin() {
     imagens: imagensArray
   })
 
-  alert("Veículo cadastrado!")
+  toast.success("Veículo cadastrado!")
 }
 
 async function deletarVeiculo(id: string) {
   await deleteDoc(doc(db, "veiculos", id))
-  alert("Veículo deletado!")
+  toast.success("Veículo deletado!")
   setVeiculos((prev) => prev.filter(v => v.id !== id))
 }
 
@@ -67,7 +68,7 @@ async function atualizarVeiculo() {
     imagens: imagensArray
   })
 
-  alert("Veículo atualizado!")
+  toast.success("Veículo atualizado!")
 
   setEditandoId(null)
 

@@ -2,6 +2,9 @@ import { auth } from "../../services/firebase"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { toast } from "sonner"
+
+
 
 function Login(){
 
@@ -14,7 +17,7 @@ function Login(){
       await signInWithEmailAndPassword(auth, email, senha)
       navigate("/admin")
     } catch (error) {
-      alert("Erro ao fazer login" + error)
+      toast.error("Erro ao fazer login" + error)
     }
   }
 
