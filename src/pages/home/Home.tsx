@@ -155,7 +155,7 @@ function Home(){
             {veiculosFiltrados.map((veiculo) => (
               <Card 
                 key={veiculo.id} 
-                className='shadow-md border border-gray-100 w-full cursor-pointer'
+                className='shadow-md border border-gray-100 w-full cursor-pointer pt-0'
                 onClick={() => navigate(`/detalhes/${veiculo.id}`)}>
 
                 <Carousel onClick={(e) => e.stopPropagation()}>
